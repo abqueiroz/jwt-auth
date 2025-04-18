@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -17,4 +16,93 @@ body {
   color: var(--foreground);
   background: linear-gradient(151.79deg, #16052b 4.34%, #000000 87.6%);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@theme {
+  --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
+
+  --animate-custom-pulse: custom-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  --animate-spin-and-fade: spin-and-fade 2s linear infinite ;
+
+  --animate-spin-and-fade: spin-and-fade 2s linear infinite ;
+
+
+  --animate-slide-in-out: slide-in-out 1s ease-in-out infinite alternate;
+  
+  
+  --animate-spin-and-fade: spin-and-fade 2s linear infinite;
+  
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes custom-pulse {
+
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    25% {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+
+    50% {
+      opacity: 0.3;
+      transform: scale(1.2);
+    }
+
+    75% {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes slide-in-out {
+
+    0%,
+    100% {
+      transform: translateY(-10px);
+    }
+
+    50% {
+      transform: translateY(10px);
+    }
+
+  }
+
+  @keyframes spin-and-fade {
+    0% {
+      transform: rotate(0deg);
+      opacity: 0;
+    }
+
+
+    50% {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+
+
+    100% {
+      transform: rotate(360deg);
+      opacity: 0;
+    }
+
+  }
 }
