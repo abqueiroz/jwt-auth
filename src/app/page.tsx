@@ -1,73 +1,42 @@
 // app/page.tsx
 'use client'
-import { useEffect, useState } from 'react';
+import { cn } from '@/lib/cn';
+import { Avatar } from '@/components/Avatar';
 import { useRouter } from 'next/navigation';
-
-interface User {
-  userId: string;
-  email: string;
-  // Add other user properties if needed
-}
+import { AuthProvider } from '@/provider/AuthProvider';
 
 export default function Home() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchProtectedData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch('/api/protected');
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data.user);
-        } else if (response.status === 401) {
-          router.push('/login');
-        } else {
-          const data = await response.json();
-          setError(data.error || 'Failed to fetch protected data');
-        }
-      } catch (err) {
-        console.error('Error fetching protected data:', err);
-        setError('An unexpected error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProtectedData();
-  }, [router]);
-
-  if (loading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="flex justify-center items-center h-screen text-red-500">Error: {error}</div>;
-  }
-
-  if (!user) {
-    return null;
-  }
-
   return (
-    <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-      <div className="bg-white p-8 rounded shadow-md">
-        <h1 className="text-2xl font-semibold mb-4">Welcome, <span className="text-blue-500">{'user.email'}</span>!</h1>
-        <p className="text-gray-700 mb-4">This is a protected home page. Only authenticated users can see this.</p>
-        <button
-          onClick={() => {
-            document.cookie = 'authToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-           // router.push('/login');
-          }}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    <AuthProvider>
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <div
+          className={cn(
+            "p-6 rounded-xl shadow-2xl backdrop-blur-md",
+            "bg-white/5 border border-white/10",
+            "transition-all duration-500 space-y-6"
+          )}
         >
-          Logout
-        </button>
-      </div>
-    </main>
+          <div className='inline-flex text-center justify-start items-center w-full gap-4'>
+            <Avatar name='Arthur Queiroz' />
+            <h1 className="text-2xl font-semibold h-full">
+              Welcome, <span className="text-blue-500">{'Arthur Queiroz'}</span>!
+            </h1>
+          </div>
+          <p className="text-gray-700 mb-4">This is a protected home page. Only authenticated users can see this.</p>
+          <button
+            onClick={() => {
+              document.cookie = 'authToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+              router?.push('/login');
+            }}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Logout
+          </button>
+        </div>
+      </main>
+    </AuthProvider>
+
   );
 }

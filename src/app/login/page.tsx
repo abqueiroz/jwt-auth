@@ -25,7 +25,6 @@ const LoginPage = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(state)
     debugger
     setState((prevState) => ({ ...prevState, error: '' }));
 
@@ -78,19 +77,21 @@ const LoginPage = () => {
         >
           <FormInput
             id='email'
+            name='email'
             type='email'
             autoComplete='email'
-            labelName='Email address'
+            $labelName='Email address'
             placeholder='Enter your email'
-            isRequired
+            $isRequired
             onChange={handleChange}
           />
           <FormInput
             id='password'
+            name='password'
             type='password'
             autoComplete='current-password'
-            labelName='Password'
-            isRequired
+            $labelName='Password'
+            $isRequired
             placeholder='Enter your password'
             onChange={handleChange}
           />

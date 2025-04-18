@@ -11,7 +11,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             <button
                 type={type}
                 className={cn(
-                     "w-full py-3 text-white font-semibold",
+                     "w-full py-3 text-white font-semibold cursor-pointer",
                       "bg-gradient-to-r from-purple-500 to-blue-500",
                       "hover:from-purple-600 hover:to-blue-600",
                       "focus:outline focus:outline-offset-4 focus:outline-purple-400",

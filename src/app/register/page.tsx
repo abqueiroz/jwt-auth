@@ -8,6 +8,8 @@ interface RegisterFormState {
   email: string;
   password: string;
   error: string;
+  github: string | null,
+
 }
 
 export default function RegisterPage() {
@@ -15,6 +17,7 @@ export default function RegisterPage() {
     email: '',
     password: '',
     error: '',
+    github: null,
   });
   const router = useRouter();
 
@@ -48,8 +51,8 @@ export default function RegisterPage() {
     }
   };
 
- return (
-    <main>
+  return (
+    <main className='flex w-full justify-center flex-col'>
       <div className="text-center">
         <h1
           className={cn(
@@ -65,29 +68,41 @@ export default function RegisterPage() {
       </div>
       <div
         className={cn(
-          "p-6 rounded-xl shadow-2xl backdrop-blur-md",
+          " min-w-80 p-6 rounded-xl shadow-2xl backdrop-blur-md",
           "bg-white/5 border border-white/10",
           "transition-all duration-500 space-y-6"
         )}
       >
-        <form className="space-y-6" onSubmit={handleSubmit}
+        <form className="space-y-5" onSubmit={handleSubmit}
         >
           <FormInput
             id='email'
             type='email'
             autoComplete='email'
-            labelName='Email address'
+            $labelName='Email address'
             placeholder='Enter your email'
-            isRequired
+            $isRequired
+            name='email'
             onChange={handleChange}
           />
           <FormInput
             id='password'
             type='password'
+            name='password'
             autoComplete='current-password'
-            labelName='Password'
-            isRequired
+            $labelName='Password'
+            $isRequired
             placeholder='Enter your password'
+            onChange={handleChange}
+          />
+
+          <FormInput
+            id='password'
+            type='password'
+            name='github'
+            autoComplete='current-password'
+            $labelName='Github name'
+            placeholder='add your github name'
             onChange={handleChange}
           />
           <Button
@@ -99,14 +114,14 @@ export default function RegisterPage() {
 
         <div className="text-center text-gray-400 text-sm">
           <span>
-            Don`t have an account?
+            Do you already have an account?
           </span>
           {' '}
           <a
             href="/login"
-            className="hover:text-purple-300 transition-colors duration-200 cursor-pointer"
+            className="cursor-pointer hover:text-purple-300 transition-colors duration-200 "
           >
-            Register
+            LogIn
           </a>
         </div>
       </div>

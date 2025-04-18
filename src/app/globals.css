@@ -18,21 +18,26 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a,
+button {
+  cursor: pointer;
+}
+
 @theme {
   --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
 
   --animate-custom-pulse: custom-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  
-  --animate-spin-and-fade: spin-and-fade 2s linear infinite ;
 
-  --animate-spin-and-fade: spin-and-fade 2s linear infinite ;
+  --animate-spin-and-fade: spin-and-fade 2s linear infinite;
+
+  --animate-spin-and-fade: spin-and-fade 2s linear infinite;
 
 
   --animate-slide-in-out: slide-in-out 1s ease-in-out infinite alternate;
-  
-  
+
+
   --animate-spin-and-fade: spin-and-fade 2s linear infinite;
-  
+
   @keyframes fade-in-scale {
     0% {
       opacity: 0;
