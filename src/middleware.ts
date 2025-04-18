@@ -10,12 +10,12 @@ export async function middleware(req: NextRequest) {
 
   if (publicRoutes.includes(pathname)) {
     if (authToken && verifyToken(authToken)) {   
-      return NextResponse.redirect(new URL("/", req.url));
+      return NextResponse.redirect(new URL("/", req.nextUrl));
     }
     return NextResponse.next()
   }
 
   if (!authToken || !verifyToken(authToken)) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 }

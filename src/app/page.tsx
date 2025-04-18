@@ -3,13 +3,13 @@
 import { cn } from '@/lib/cn';
 import { Avatar } from '@/components/Avatar';
 import { useRouter } from 'next/navigation';
-import { AuthProvider } from '@/provider/AuthProvider';
+//import { AuthProvider } from '@/provider/AuthProvider';
 
 export default function Home() {
   const router = useRouter();
 
   return (
-    <AuthProvider>
+    <>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <div
           className={cn(
@@ -36,7 +36,7 @@ export default function Home() {
           </button>
         </div>
       </main>
-    </AuthProvider>
+    </>
 
   );
 }

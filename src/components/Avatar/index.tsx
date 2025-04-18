@@ -7,7 +7,6 @@ interface AvatarProps {
 }
 
 export const Avatar = ({ name, imgUrl = '' }: AvatarProps) => {
-    debugger
     const splitName = name.split(' ')
     const firstName = splitName.at(0)?.charAt(0)
     const lastName = splitName.at(-1)?.charAt(0)
