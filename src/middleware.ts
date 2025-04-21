@@ -1,4 +1,3 @@
-import { verifyToken } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
@@ -9,13 +8,21 @@ export async function middleware(req: NextRequest) {
   console.log('THE AUTHTOJKEN IS:',authToken)
 
   if (publicRoutes.includes(pathname)) {
-    if (authToken && verifyToken(authToken)) {   
+    if (authToken) {   
       return NextResponse.redirect(new URL("/", req.nextUrl));
     }
     return NextResponse.next()
   }
 
-  if (!authToken || !verifyToken(authToken)) {
+  if (!authToken) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
+  return NextResponse.next()
+
+}
+export const config = {
+  matcher: [
+    // Inclui todas as rotas...
+    '/((?!api|_next/static|_next/image|favicon.ico|login).*)',
+  ],
 }

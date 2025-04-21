@@ -3,6 +3,7 @@
 import { cn } from '@/lib/cn';
 import { Avatar } from '@/components/Avatar';
 import { useRouter } from 'next/navigation';
+import { destroyAuthCookie } from '@/lib/auth';
 //import { AuthProvider } from '@/provider/AuthProvider';
 
 export default function Home() {
@@ -27,7 +28,7 @@ export default function Home() {
           <p className="text-gray-700 mb-4">This is a protected home page. Only authenticated users can see this.</p>
           <button
             onClick={() => {
-              document.cookie = 'authToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+              destroyAuthCookie()
               router?.push('/login');
             }}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

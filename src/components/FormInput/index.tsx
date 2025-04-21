@@ -1,5 +1,6 @@
 import { ComponentProps } from "react"
 import { InputText } from "../TextInput"
+import { PasswordInput } from "../PasswordInput"
 
 interface FormInputProps extends ComponentProps<'input'> {
     $labelName: string
@@ -14,13 +15,22 @@ export const FormInput = ({ $labelName, id, $isRequired = false, ...rest }: Form
             htmlFor={id}
             className="block text-sm font-medium text-gray-200 mb-2"
         >
-            {$isRequired?"* ":""}{$labelName}
+            {$isRequired ? "* " : ""}{$labelName}
         </label>
-        <InputText
+        {rest.type === 'password' ?
+            <PasswordInput 
             id={id}
             required={$isRequired}
             className="mt-1 bg-black/20 text-white border-purple-500/30 placeholder:text-gray-400"
-            {...rest}
-        />
+            {...rest} />
+            :
+            <InputText
+                id={id}
+                required={$isRequired}
+                className="mt-1 bg-black/20 text-white border-purple-500/30 placeholder:text-gray-400"
+                {...rest}
+            />
+        }
+
     </div>)
 }

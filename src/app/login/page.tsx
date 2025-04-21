@@ -3,6 +3,7 @@ import { cn } from '@/lib/cn';
 import React, { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, FormInput } from '@/components';
+import { setAuthCookie } from '@/lib/auth';
 
 interface LoginFormState {
   email: string;
@@ -25,11 +26,10 @@ const LoginPage = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    debugger
     setState((prevState) => ({ ...prevState, error: '' }));
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('http://localhost:4000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,6 +38,8 @@ const LoginPage = () => {
       });
 
       if (response.ok) {
+        const data = await response.json()
+        setAuthCookie(data.token ?? null)
         router.push('/');
       } else {
         const data = await response.json();

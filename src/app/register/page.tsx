@@ -31,12 +31,12 @@ export default function RegisterPage() {
     setState((prevState) => ({ ...prevState, error: '' }));
 
     try {
-      const response = await fetch('/api/auth/register', {
+      const response = await fetch('http://localhost:4000/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: state.email, password: state.password }),
+        body: JSON.stringify({ email: state.email, password: state.password, github: state.github }),
       });
 
       if (response.ok) {
@@ -98,7 +98,7 @@ export default function RegisterPage() {
 
           <FormInput
             id='password'
-            type='password'
+            type='text'
             name='github'
             autoComplete='current-password'
             $labelName='Github name'
